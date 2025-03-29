@@ -101,9 +101,10 @@ def main():
     gru = load_model('model/gru.h5')
     saes = load_model('model/saes.h5')
     lstm_transformer = load_model('model/lstm_transformer.h5')
-    models = [lstm, gru, saes,lstm_transformer]
+    lstm_cnn = load_model('model/lstm_cnn.h5')
+    models = [lstm, gru, saes,lstm_transformer, lstm_cnn]
     #models = [lstm]
-    names = ['LSTM', 'GRU', 'SAEs','LSTM + Transformer']
+    names = ['LSTM', 'GRU', 'SAEs','LSTM + Transformer', 'LSTM + CNN']
     lag = 12
 
     file1 = 'data/100211data/100211_weekend_train.csv'

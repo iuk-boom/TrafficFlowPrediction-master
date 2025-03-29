@@ -1,7 +1,7 @@
 """
 Defination of NN model
 """
-from keras.layers import Dense, Dropout, Activation,Input,LSTM
+from keras.layers import Dense, Dropout, Activation,Input,LSTM,Conv1D,MaxPooling1D,Flatten
 from keras.layers.recurrent import LSTM, GRU
 from keras.models import Sequential,Model
 from keras.layers import MultiHeadAttention, LayerNormalization, Add
@@ -110,4 +110,25 @@ def get_lstm_transformer(units):
     transformer_output = transformer_block(lstm_output, num_heads=2, ff_dim=units[2])
     flatten_output = Dense(units[3], activation='sigmoid')(transformer_output[:, -1, :])
     model = Model(inputs=inputs, outputs=flatten_output)
+    return model
+
+def get_lstm_cnn(units):
+    """LSTM + CNN
+    Build LSTM + CNN Model.
+
+    # Arguments
+        units: List(int), number of input, output and hidden units.
+    # Returns
+        model: Model, nn model.
+    """
+    model = Sequential()
+    # 添加一维卷积层
+    model.add(Conv1D(filters=64, kernel_size=2, activation='relu', input_shape=(units[0], 1)))
+    model.add(MaxPooling1D(pool_size=2))
+    # 添加 LSTM 层
+    model.add(LSTM(units[1], return_sequences=True))
+    model.add(LSTM(units[2]))
+    model.add(Dropout(0.2))
+    model.add(Dense(units[3], activation='sigmoid'))
+
     return model

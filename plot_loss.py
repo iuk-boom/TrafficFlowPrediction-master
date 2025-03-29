@@ -28,6 +28,6 @@ def plot_loss(model_name):
     plt.show()
 
 if __name__ == '__main__':
-    models = ['lstm', 'gru', 'saes','lstm_transformer']
+    models = ['lstm', 'gru', 'saes','lstm_transformer','lstm_cnn']
     for model in models:
         plot_loss(model)

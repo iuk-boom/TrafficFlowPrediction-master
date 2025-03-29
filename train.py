@@ -110,6 +110,10 @@ def main(argv):
         X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
         m = model.get_lstm_transformer([12, 64, 64, 1])
         train_model(m, X_train, y_train, args.model, config)
+    if args.model == 'lstm_cnn':
+        X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
+        m = model.get_lstm_cnn([12, 64, 64, 1])
+        train_model(m, X_train, y_train, args.model, config)
 
 
 if __name__ == '__main__':
